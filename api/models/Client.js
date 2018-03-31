@@ -9,22 +9,42 @@ module.exports = {
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
-	  nom:{
-        type:"string", 
-        required:true
-      },
-      prenom:{
-        type:"string",
-        required:true
-      },
-      adresse:{
-        type:"string",
-        required:true
-      },
-	  telephone:{
-        type:"string",
-        required:true
-      }
+    id: {
+      columnName: 'cd_client',
+      type: 'string',
+      primaryKey: true,
+      autoIncrement: true
+    },
+    nom: {
+      type: "string"
+    },
+    prenom: {
+      type: "string"
+    },
+    mail: {
+      type: "string"
+    },
+    telephone: {
+      type: "string"
+    },
+    portable: {
+      type: "string"
+    },
+    adresse_numero: {
+      type: "string"
+    },
+    adresse: {
+      type: "string"
+    },
+    Adresse_complementaire: {
+      type: "string"
+    },
+    adresse_ville: {
+      type: "string"
+    },
+    adresse_codepostale: {
+      type: "string"
+    }
   }
 };
 

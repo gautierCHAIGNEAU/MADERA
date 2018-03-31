@@ -42,10 +42,10 @@ module.exports.connections = {
   ***************************************************************************/
   someMysqlServer: {
     adapter: 'sails-mysql',
-    host: 'localhost',
-    user: 'root', //optional
-    password: '', //optional
-    database: 'madera' //optional
+    host: '93.90.202.141',
+    user: 'madera', //optional
+    password: 'madera2018@', //optional
+    database: 'bdd_madera' //optional
   },
 
   /***************************************************************************
