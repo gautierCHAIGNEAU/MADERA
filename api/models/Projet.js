@@ -1,50 +1,36 @@
 /**
- * Client.js
+ * Projet.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
+
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
     id: {
-      columnName: 'cd_client',
+      columnName: 'cd_projet',
       type: 'number',
       primaryKey: true,
       autoIncrement: true
     },
-    nom: {
+    titre: {
       type: "string"
     },
-    prenom: {
+    date_creation: {
       type: "string"
     },
-    mail: {
-      type: "string"
+    cd_client: {
+      model: "client"
     },
-    telephone: {
-      type: "string"
-    },
-    portable: {
-      type: "string"
-    },
-    adresse_numero: {
-      type: "string"
-    },
-    adresse: {
-      type: "string"
-    },
-    Adresse_complementaire: {
-      type: "string"
-    },
-    adresse_ville: {
-      type: "string"
-    },
-    adresse_codepostale: {
-      type: "string"
+    paiements: {
+      collection: "paiement",
+      via: "cd_projet",
+      through: "projet_paiement"
     }
+    
   }
 };
 

@@ -1,16 +1,17 @@
 /**
- * Client.js
+ * Modele.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
+
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
     id: {
-      columnName: 'cd_client',
+      columnName: 'cd_modele',
       type: 'number',
       primaryKey: true,
       autoIncrement: true
@@ -18,33 +19,29 @@ module.exports = {
     nom: {
       type: "string"
     },
-    prenom: {
+    description: {
       type: "string"
     },
-    mail: {
+    nbre_etage: {
       type: "string"
     },
-    telephone: {
+    lien_brochure: {
       type: "string"
     },
-    portable: {
-      type: "string"
+    cd_gamme: {
+      model: "gamme"
     },
-    adresse_numero: {
-      type: "string"
+    pieces: {
+      collection: "piece",
+      via: "cd_modele",
+      through: "modele_piece"
     },
-    adresse: {
-      type: "string"
-    },
-    Adresse_complementaire: {
-      type: "string"
-    },
-    adresse_ville: {
-      type: "string"
-    },
-    adresse_codepostale: {
-      type: "string"
+    modules: {
+      collection: "module",
+      via: "cd_modele",
+      through: "modele_module"
     }
+
   }
 };
 

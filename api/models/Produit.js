@@ -1,50 +1,47 @@
 /**
- * Client.js
+ * Produit.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
+
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
     id: {
-      columnName: 'cd_client',
+      columnName: 'cd_produit',
       type: 'number',
       primaryKey: true,
       autoIncrement: true
     },
-    nom: {
+    note: {
       type: "string"
     },
-    prenom: {
+    nbre_etage: {
       type: "string"
     },
-    mail: {
-      type: "string"
+    cd_gamme: {
+      model: "gamme"
     },
-    telephone: {
-      type: "string"
+    cd_modele: {
+      model: "modele"
     },
-    portable: {
-      type: "string"
+    cd_devis: {
+      model: "devis"
     },
-    adresse_numero: {
-      type: "string"
+    modules: {
+      collection: "module",
+      via: "cd_produit",
+      through: "produit_module"
     },
-    adresse: {
-      type: "string"
-    },
-    Adresse_complementaire: {
-      type: "string"
-    },
-    adresse_ville: {
-      type: "string"
-    },
-    adresse_codepostale: {
-      type: "string"
+    pieces: {
+      collection: "piece",
+      via: "cd_produit",
+      through: "produit_piece"
     }
+
   }
 };
 

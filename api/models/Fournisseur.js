@@ -1,24 +1,22 @@
 /**
- * Client.js
+ * Fournisseur.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
+
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
     id: {
-      columnName: 'cd_client',
+      columnName: 'cd_fournisseur',
       type: 'number',
       primaryKey: true,
       autoIncrement: true
     },
-    nom: {
-      type: "string"
-    },
-    prenom: {
+    raison_social: {
       type: "string"
     },
     mail: {
@@ -30,13 +28,13 @@ module.exports = {
     portable: {
       type: "string"
     },
-    adresse_numero: {
+    adresse_numeros: {
       type: "string"
     },
     adresse: {
       type: "string"
     },
-    Adresse_complementaire: {
+    adresse_complementaire: {
       type: "string"
     },
     adresse_ville: {
@@ -44,7 +42,13 @@ module.exports = {
     },
     adresse_codepostale: {
       type: "string"
+    },
+    composants: {
+      collection: "composant",
+      via: "cd_fournisseur",
+      through: "fournisseur_composant"
     }
+
   }
 };
 

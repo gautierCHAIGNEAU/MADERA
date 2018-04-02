@@ -1,7 +1,7 @@
 /**
- * MaterielController
+ * PieceController
  *
- * @description :: Server-side logic for managing materiels
+ * @description :: Server-side logic for managing pieces
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
