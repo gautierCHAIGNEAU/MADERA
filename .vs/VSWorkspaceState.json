@@ -6,6 +6,6 @@
     "\\api\\models",
     "\\config"
   ],
-  "SelectedNode": "\\api\\models\\Materiel.js",
+  "SelectedNode": "\\api\\controllers\\ProduitController.js",
   "PreviewInSolutionExplorer": false
 }
