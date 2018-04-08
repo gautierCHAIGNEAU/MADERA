@@ -19,7 +19,7 @@ module.exports = {
     note: {
       type: "string"
     },
-    nbre_etage: {
+    nbr_etage: {
       type: "string"
     },
     cd_gamme: {
