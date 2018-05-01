@@ -1,0 +1,66 @@
+	<%- partial("../header.ejs") %>
+	
+    <div class="container">
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <div class="table-wrapper">
+                    <div class="table-title">
+						<div class="row">
+                            <div class="col-sm-6">
+                                <a href="/client/new" class="btn btn-success">Ajouter Client</a>
+                            </div>
+                            
+                        </div>
+						<br/>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Clients enregistrés</h2>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <table class="table table-striped thead-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Mail</th>
+                                <th>Adresse</th>
+                                <th>Tél. fixe</th>
+                                <th>Tél. portable</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: rows">
+							<% _.each(clients, function(client) { %>
+								<tr>
+									<td><%= client.id %></td>
+									<td><%= client.nom %></td>
+									<td><%= client.prenom %></td>
+									<td><%= client.mail %></td>
+									<td><%= client.adresse_numero %>, <%= client.adresse %> <%= client.adresse_codepostale %> <%= client.adresse_ville %></td>
+									<td><%= client.telephone %></td>
+									<td><%= client.portable %></td>
+									<td>
+										<a href="/client/update/<%= client.id %>" ><i class="glyphicon glyphicon-pencil" title="Edit"></i></a>
+										<a href="/client/destroy/<%= client.id %>"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
+									</td>
+								</tr>
+							<% }) %>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+
+
+            </div>
+
+        </div>
+    </div>
+
+	<%- partial("../footer.ejs") %>

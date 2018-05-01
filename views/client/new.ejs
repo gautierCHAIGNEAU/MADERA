@@ -1,0 +1,95 @@
+<%- partial("../header.ejs") %>
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6">
+            <h2>Client</h2>
+        </div>
+    </div>
+	<br/>
+	<div class="row">
+        <div class="col-md-12">
+			<form class="form-horizontal" action="/client/create<% if(client && client.id){ %>/<%= client.id %> <% } %>" method="POST">
+				<fieldset>
+					<legend>Informations</legend>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Nom</label>  
+					  <div class="col-md-4">
+					  <input name="nom" class="form-control input-md" type="text"  <% if(client && client.nom){ %> value=<%= client.nom %> <% } %> >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Prenom</label>  
+					  <div class="col-md-4">
+					  <input name="prenom" class="form-control input-md" type="text" <% if(client && client.prenom){ %> value=<%= client.prenom %> <% } %> >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Mail</label>  
+					  <div class="col-md-4">
+					  <input name="mail" class="form-control input-md" type="text" <% if(client && client.mail){ %> value=<%= client.mail %> <% } %>  >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Tel. fixe</label>  
+					  <div class="col-md-4">
+					  <input name="telephone" class="form-control input-md" type="text"  <% if(client && client.telephone){ %> value=<%= client.telephone %> <% } %>  >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Tel. portable</label>  
+					  <div class="col-md-4">
+					  <input name="portable" class="form-control input-md" type="text" <% if(client && client.portable){ %> value=<%= client.portable %> <% } %>   >
+					  </div>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>Adresse</legend>
+					<div class="form-group">
+					  <label class="col-md-4 control-label">N°</label>  
+					  <div class="col-md-4">
+					  <input name="adresse_numero" class="form-control input-md" type="text" <% if(client && client.adresse_numero){ %> value=<%= client.adresse_numero %> <% } %>    >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Adresse</label>  
+					  <div class="col-md-4">
+					  <input name="adresse" class="form-control input-md" type="text"  <% if(client && client.adresse){ %> value=<%= client.adresse %> <% } %>  >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Complément</label>  
+					  <div class="col-md-4">
+					  <input name="Adresse_complementaire" class="form-control input-md" type="text"  <% if(client && client.Adresse_complementaire){ %> value=<%= client.Adresse_complementaire %> <% } %>   >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Ville</label>  
+					  <div class="col-md-4">
+					  <input name="adresse_ville" class="form-control input-md" type="text"  <% if(client && client.adresse_ville){ %> value=<%= client.adresse_ville %> <% } %>  >
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Code postale</label>  
+					  <div class="col-md-4">
+					  <input name="adresse_codepostale" class="form-control input-md" type="text" <% if(client && client.adresse_codepostale){ %> value=<%= client.adresse_codepostale %> <% } %> >
+					  </div>
+					</div>
+				</fieldset>
+				
+				<input class="btn btn-success" type="submit" value="Envoyer" />
+				
+			</form>
+		</div>
+	</div>
+</div>
+<%- partial("../footer.ejs") %>

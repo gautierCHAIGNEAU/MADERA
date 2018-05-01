@@ -4,8 +4,11 @@
     "\\api",
     "\\api\\controllers",
     "\\api\\models",
-    "\\config"
+    "\\config",
+    "\\config\\env",
+    "\\views",
+    "\\views\\client"
   ],
-  "SelectedNode": "\\api\\models\\Utilisateur.js",
+  "SelectedNode": "\\api\\controllers\\ClientController.js",
   "PreviewInSolutionExplorer": false
 }
