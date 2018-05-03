@@ -30,13 +30,38 @@
 
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/bootstrap2.min.css">
-    <link rel="stylesheet" href="/styles/importer.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="stylesheet" href="/styles/style.css">
     <!--STYLES END-->
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Application Madera</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Accueil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/projet/all">Espace Projet</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/client/all">Clients</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <h5><span class="badge badge-success">Mode Connecté</span></h5>
+            </form>
+        </div>
+    </nav>
     <%- body %>
 
 
@@ -92,11 +117,9 @@
 
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/npm.js"></script>
-    <script src="/js/router.js"></script>
+    <script src="/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="/js/scripts/projet/script.js"></script>
+    <script src="/js/vendor/bootstrap.js"></script>
     <!--SCRIPTS END-->
   </body>
 </html>

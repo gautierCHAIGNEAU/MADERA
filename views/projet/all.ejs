@@ -1,0 +1,77 @@
+	
+    <div class="container">
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <br/>
+						<div class="row">
+                            <div class="col-sm-6">
+                                <a href="/projet/new" class="btn btn-success">Créer un projet</a>
+                            </div>
+                            
+                        </div>
+						<br/>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Projets</h2>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                     <form class="form-inline" action="/projet/all" method="post">
+                      <div class="form-group inlineForm">
+                        <label for="email" class="inlineForm">Recherche:</label>
+                        <input name="recherche" placeholder="..." class="form-control input-md" type="text">
+                      </div>
+                       <label class="radio-inline inlineForm" for="radios-0">
+                         <input  name="radios" value="projet" checked="checked" type="radio" style="margin-right:5px;">
+                         Nom projet
+                       </label> 
+                       <label class="radio-inline inlineForm" for="radios-1">
+                         <input name="radios" value="client" type="radio" style="margin-right:5px;">
+                         Nom client
+                       </label> 
+                      <button type="submit" class="btn btn-primary inlineForm" >Rechercher</button>
+                    </form> 
+                            
+                  
+                    <table class="table table-striped thead-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>Réf.</th>
+                                <th>Nom</th>
+                                <th>Client</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: rows">
+                        <% if(projets){ %>
+							<% _.each(projets, function(projet) { %>
+								<tr>
+                                    <td><%= projet.id %></td>
+									<td> <a href="/projet/show/<%= projet.id %>"><%= projet.titre %></a></td>
+									<td><%= projet.cd_client.nom %> <%= projet.cd_client.prenom %></td>
+									<td><%= new Date(projet.date_creation).getDate() %>/<%= new Date(projet.date_creation).getMonth() + 1 %>/<%= new Date(projet.date_creation).getFullYear() %></td>
+									<td>
+										<a href="/projet/update/<%= projet.id %>" ><i class="glyphicon glyphicon-pencil" title="Edit">Modif</i></a>
+										<a href="/projet/destroy/<%= projet.id %>"><i class="glyphicon glyphicon-trash" title="Delete">Suppr</i></a>
+									</td>
+								</tr>
+							<% }) %>
+                            
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
+
+
+            </div>
+
+        </div>
+    </div>

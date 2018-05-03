@@ -1,4 +1,4 @@
-	<%- partial("../header.ejs") %>
+
 	
     <div class="container">
 
@@ -8,6 +8,7 @@
 
                 <div class="table-wrapper">
                     <div class="table-title">
+                        <br/>
 						<div class="row">
                             <div class="col-sm-6">
                                 <a href="/client/new" class="btn btn-success">Ajouter Client</a>
@@ -46,8 +47,8 @@
 									<td><%= client.telephone %></td>
 									<td><%= client.portable %></td>
 									<td>
-										<a href="/client/update/<%= client.id %>" ><i class="glyphicon glyphicon-pencil" title="Edit"></i></a>
-										<a href="/client/destroy/<%= client.id %>"><i class="glyphicon glyphicon-trash" title="Delete"></i></a>
+										<a href="/client/update/<%= client.id %>" ><i class="glyphicon glyphicon-pencil" title="Edit">Modif</i></a>
+										<a href="/client/destroy/<%= client.id %>"><i class="glyphicon glyphicon-trash" title="Delete">Suppr</i></a>
 									</td>
 								</tr>
 							<% }) %>
@@ -62,5 +63,3 @@
 
         </div>
     </div>
-
-	<%- partial("../footer.ejs") %>
