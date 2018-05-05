@@ -25,8 +25,8 @@ module.exports = {
     cd_gamme: {
       model: "gamme"
     },
-    cd_modele: {
-      model: "modele"
+    cd_projet: {
+      model: "projet"
     },
     cd_devis: {
       model: "devis"

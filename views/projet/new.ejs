@@ -15,9 +15,20 @@
 					<div class="form-group">
 					  <label class="col-md-4 control-label">Nom du projet</label>  
 					  <div class="col-md-4">
-					  <input name="nom" class="form-control input-md" type="text"  <% if(projet && projet.titre){ %> value="<%= projet.titre %>" <% } %> >
+					  <input name="titre" class="form-control input-md" type="text"  <% if(projet && projet.titre){ %> value="<%= projet.titre %>" <% } %> >
 					  </div>
 					</div>
+                    
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="selectbasic">Clients</label>
+                      <div class="col-md-4">
+                        <select name="cd_client" class="form-control">
+                            <% _.each(clients, function(cl) { %>
+                                <option value="<%= cl.id %>"  <% if(client && client.id == cl.id){ %>selected<% } %> ><%= cl.nom %> <%= cl.prenom %></option>
+                            <% }) %>
+                        </select>
+                      </div>
+                    </div>
 				</fieldset>
 
 				

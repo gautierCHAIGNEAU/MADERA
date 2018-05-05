@@ -1,0 +1,110 @@
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6">
+            <h2>Maison Modulaire</h2>
+        </div>
+    </div>
+	<br/>
+	<div class="row">
+        <div class="col-md-12">
+			<form class="form-horizontal" action="/produit/create" method="POST">
+				<fieldset>
+					<legend>Choix du modèle</legend>
+					
+					<div class="form-group">
+					  <label class="col-md-4 control-label">Nom du produit</label>  
+					  <div class="col-md-4">
+					  <input name="note" class="form-control input-md" type="text" >
+					  </div>
+					</div>
+                    
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="selectbasic">Gammes</label>
+                      <div class="col-md-4">
+                        <select name="cd_gamme" id="selectGammes" class="form-control" onchange="loadModeles()">
+                            <% _.each(gammes, function(gamme) { %>
+                                <option value="<%= gamme.id %>" ><%= gamme.nom %></option>
+                            <% }) %>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <p>Isolation: <i id="gammeIsolation"></i></p>
+                    
+                    <p>Couverture: <i id="gammeCouverture"></i></p>
+                    
+                    <p>Finition extérieur: <i id="gammeFinExt"></i></p>
+                    
+                    <p>Finition intérieur: <i id="gammeFinInt"></i></p>
+                    
+                    
+                    <div class="row" id="gallerie_modeles">
+                    </div>
+                    
+                    <input type="hidden" name="cd_projet" value="<%= projet %>" />
+                </fieldset>
+
+               
+				<br/>
+				<input class="btn btn-success" type="submit" value="Envoyer" />
+                <br/>
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+    var modeles = <%- JSON.stringify(modeles) %>;
+    var gammes = <%- JSON.stringify(gammes) %>;
+    
+    
+    
+    function loadModeles(){
+       
+        var selectGammes = document.getElementById("selectGammes");
+        var idGamme = selectGammes.value;
+        
+        var isolation = document.getElementById("gammeIsolation");
+        var couverture = document.getElementById("gammeCouverture");
+        var finition_ext = document.getElementById("gammeFinExt");
+        var finition_int = document.getElementById("gammeFinInt");
+        
+        for(var i = 0; i < gammes.length; i++){
+            if(gammes[i].id == idGamme){
+                isolation.innerHTML = gammes[i].isolant.designation;
+                couverture.innerHTML = gammes[i].couverture.designation;
+                finition_ext.innerHTML = gammes[i].finition_exterieur.designation;
+                finition_int.innerHTML = gammes[i].finition_interieur.designation;
+            }
+        }
+        
+        var gallerie = document.getElementById("gallerie_modeles");
+        gallerie.innerHTML = "";
+        
+        
+        for(var i = 0; i < modeles.length; i++){
+            if(modeles[i].cd_gamme == idGamme){
+                gallerie.innerHTML += modeleImage(modeles[i]);
+            }
+        }
+        
+    }
+        
+    function modeleImage(modele){
+        var html = "";
+        html += '<div class="col-md-4">';
+        html += '  <div class="thumbnail">';
+        html += '      <img src="/images/' + modele.nom + '.jpg" alt="Lights" style="width:100%">';
+        html += '      <div class="caption">';
+        html += '        <p>' + modele.nom + '</p>';
+        html += '        <input type="radio" name="cd_modele" value="' + modele.id +  '" />';
+        html += '      </div>';
+        html += '  </div>';
+        html += '</div>';
+        
+        return html;
+    }
+    
+</script>

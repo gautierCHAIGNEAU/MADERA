@@ -16,16 +16,22 @@ module.exports = {
       primaryKey: true,
       autoIncrement: true
     },
-    finition: {
-      type: "string"
+    finition_exterieur: {
+      model: "composant"
+    },
+    finition_interieur: {
+       model: "composant"
     },
     isolant: {
-      type: "string"
+       model: "composant"
     },
     couverture: {
-      type: "string"
+       model: "composant"
     },
     qualite_huisserie: {
+      type: "string"
+    },
+    nom: {
       type: "string"
     }
   }

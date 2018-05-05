@@ -55,23 +55,60 @@ module.exports = {
 
 	},
     
-    'new': function(req, res){
-		res.view({
-			projet: null
-		});
+    'new': function(req, res, next){
+        Client.find(function(err, clients){
+            if(err){
+                return next(err);
+            }
+            if(!clients){
+                return next();
+            }
+            clients.sort(function(a,b) {
+                if (a.nom > b.nom) return 1;
+                if (a.nom < b.nom) return -1;
+                return 0
+            })
+            res.view({
+                projet: null,
+                client: null,
+                clients: clients
+            });
+        });
+		
 	},
 	
 	'update': function(req, res){
-		Projet.findOne(req.param('id'), function(err, projet){
-			res.view('projet/new',{
-				projet: projet
-			});
+		Projet.findOne(req.param('id')).populate("cd_client").exec(function(err, projet){
+            if(err){
+                return next(err);
+            }
+            if(!projet){
+                return next();
+            }
+             Client.find(function(err, clients){
+                if(err){
+                    return next(err);
+                }
+                if(!clients){
+                    return next();
+                }
+                clients.sort(function(a,b) {
+                    if (a.nom > b.nom) return 1;
+                    if (a.nom < b.nom) return -1;
+                    return 0
+                })
+                res.view('projet/new',{
+                    projet: projet,
+                    client: projet.cd_client,
+                    clients: clients
+                });
+            });
+			
 		});
 	},
     
     create: function(req,res,next){
 		if(req.param('id')){
-   
 			Projet.findOne(req.param('id'), function(err, projet){
 				if(err){
 					return next(err);
@@ -80,7 +117,8 @@ module.exports = {
 					return next();
 				}
 
-				projet.titre = req.param('nom');
+				projet.titre = req.param('titre');
+                projet.cd_client = req.param('cd_client');
 
 				projet.date_creation = projet.date_creation.getFullYear() + "-" + (projet.date_creation.getMonth() + 1) + "-" + projet.date_creation.getDate();
                 
@@ -94,7 +132,14 @@ module.exports = {
 				
 			});
 		}else{
-			Projet.create(req.params.all(), function(err, projet){
+            var now = new Date();
+            var date = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+			Projet.create({
+                titre: req.param('titre'),
+                cd_client: req.param('cd_client'),
+                date_creation: date
+            }, 
+            function(err, projet){
 				if(err){
 					return next(err);
 				}

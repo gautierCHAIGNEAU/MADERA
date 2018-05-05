@@ -1,0 +1,74 @@
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6">
+            <h2><%= produit.note %></h2>
+        </div>
+    </div>
+	<br/>
+	<div class="row">
+        <div class="col-md-12">
+			<form class="form-inline" action="/produit/create/<%= produit.id %>" method="POST">
+				<fieldset>
+					<legend>Caractéristique du modèle</legend>
+					<div class="form-row" >
+                        <div class="form-group col-md-6">
+                          <label>Nom du produit</label>  
+                          <input name="note" class="form-control input-md" type="text" value="<%= produit.note %>">
+                         
+                        </div>
+                    </div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-6">
+                          <label for="selectIso">Isolation</label>
+                            <select name="#" class="form-control  col-md-12" id="selectIso">
+                                <% _.each(isolations, function(iso) { %>
+                                    <option value="<%= iso.id %>" <% if(produit.cd_gamme.isolant == iso.id){ %>selected<% } %> ><%= iso.designation %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                          <label for="selectCouv">Couverture</label>
+                            <select name="#" class="form-control  col-md-12" id="selectCouv">
+                                <% _.each(couvertures, function(couv) { %>
+                                    <option value="<%= couv.id %>" <% if(produit.cd_gamme.couverture == couv.id){ %>selected<% } %> ><%= couv.designation %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row" >
+                        <div class="form-group col-md-6">
+                          <label for="selectFinExt">Finitions extérieur</label>
+                            <select name="#" class="form-control  col-md-12" id="selectFinExt">
+                                <% _.each(finitions_ext, function(fin) { %>
+                                    <option value="<%= fin.id %>" <% if(produit.cd_gamme.finition_exterieur == fin.id){ %>selected<% } %> ><%= fin.designation %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                          <label for="selectFinInt">Finitions intérieur</label>
+                            <select name="#" class="form-control  col-md-12" id="selectFinInt">
+                                <% _.each(finitions_int, function(fin) { %>
+                                    <option value="<%= fin.id %>" <% if(produit.cd_gamme.finition_interieur == fin.id){ %>selected<% } %> ><%= fin.designation %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        
+                    </div>
+               
+                    <br/>
+               
+				
+				    <input class="btn btn-success" type="submit" value="Envoyer" />
+                </fieldset>
+                
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+

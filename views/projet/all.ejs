@@ -54,7 +54,7 @@
 							<% _.each(projets, function(projet) { %>
 								<tr>
                                     <td><%= projet.id %></td>
-									<td> <a href="/projet/show/<%= projet.id %>"><%= projet.titre %></a></td>
+									<td> <a href="/produit/all/<%= projet.id %>"><%= projet.titre %></a></td>
 									<td><%= projet.cd_client.nom %> <%= projet.cd_client.prenom %></td>
 									<td><%= new Date(projet.date_creation).getDate() %>/<%= new Date(projet.date_creation).getMonth() + 1 %>/<%= new Date(projet.date_creation).getFullYear() %></td>
 									<td>

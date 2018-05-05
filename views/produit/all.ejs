@@ -1,0 +1,58 @@
+	
+    <div class="container">
+
+        <div class="row">
+            
+            <div class="col-md-12">
+
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <br/>
+						<div class="row">
+                            <div class="col-sm-6">
+                                <a href="/produit/new/<%= projet %>" class="btn btn-success">Ajouter une maison au projet</a>
+                            </div>
+                            
+                        </div>
+						<br/>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Maisons Modulaires</h2>
+                            </div>
+                            
+                        </div>
+                    </div>
+                            
+                  
+                    <table class="table table-striped thead-dark table-hover">
+                        <thead>
+                            <tr>
+                                <th>Réf.</th>
+                                <th>Nom</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: rows">
+                        <% if(produits){ %>
+							<% _.each(produits, function(produit) { %>
+								<tr>
+                                    <td><%= produit.id %></td>
+									<td> <a href="/produit/show/<%= produit.id %>" ><%= produit.note %></a></td>
+									<td>
+                                        <a href="/produit/update/<%= produit.id %>" ><i class="glyphicon glyphicon-pencil" title="Edit">Modif</i></a>
+										<a href="/produit/destroy/<%= produit.id %>?projet=<%= projet %>"><i class="glyphicon glyphicon-trash" title="Delete">Suppr</i></a>
+									</td>
+								</tr>
+							<% }) %>
+                            
+                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                
+
+
+            </div>
+
+        </div>
+    </div>
