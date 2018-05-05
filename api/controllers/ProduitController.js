@@ -141,6 +141,22 @@ module.exports = {
 		
 	},
     
+    'module': function(req,res,next){
+         Produit.findOne(req.query.produit).populate("cd_gamme").exec(function(err, produit){
+            if(err){
+                return next(err);
+            }
+            if(!produit){
+                return next();
+            }
+             res.view({
+                 produit: produit,
+                 module: null
+             });
+         });
+        
+    },
+    
     destroy: function(req, res, next){
 		Produit.destroy(req.param('id'), function(err, produit){
 			if(err){

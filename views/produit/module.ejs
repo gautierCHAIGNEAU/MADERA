@@ -1,0 +1,276 @@
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6">
+            <h2><%= produit.note %></h2>
+        </div>
+    </div>
+	<br/>
+	<div class="row">
+        <div class="col-md-6">
+            <img id="myImg" src="/images/<%= produit.plan %>" alt="Plan" style="width:100%">
+        </div>
+        
+        <div class="col-md-6">
+			<form class="form-inline" action="/module/create" method="POST">
+				<fieldset>
+					<legend>Création du module</legend>
+                    <input type="hidden" value="<%= produit.id %>" name="produit" />
+					<div class="form-row" >
+                        <div class="form-group col-md-6">
+                          <label>Nom du module</label>  
+                          <input name="designation" class="form-control input-md" type="text"  <% if(module && module.designation){ %> value="<%= module.designation %>" <% } %> >
+                         
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Longueur: <i><% if(module && module.longueur){ %><%= module.longueur %><% } %></i></label>
+                        </div>
+                        
+                    </div>
+                    <br/>
+                    
+                    <div class="row">
+                            <div class="col-sm-6">
+                                <h3>Sections</h3>
+                            </div>
+                            
+                        </div>
+                    <p class="btn btn-primary" onclick="ajoutSection()">Ajouter une section</p>
+                    <script>
+                        function selectAngle(angle){
+                            var html = '';
+                            html += ' <select name="#" class="form-control  col-md-8" id="selectAngle">';
+                            if(angle == "false"){
+                                html += '  <option value="false" selected>Aucun angle</option>';
+                                html += '  <option value="entrant" >Angle entrant</option>';
+                                html += '  <option value="sortant" >Angle sortant</option>';
+                            }else if(angle == "entrant"){
+                                html += '  <option value="false" >Aucun angle</option>';
+                                html += '  <option value="entrant" selected>Angle entrant</option>';
+                                html += '  <option value="sortant" >Angle sortant</option>';
+                            }else if(angle == "sortant"){
+                                html += '  <option value="false" >Aucun angle</option>';
+                                html += '  <option value="entrant" >Angle entrant</option>';
+                                html += '  <option value="sortant" selected>Angle sortant</option>';
+                            }
+
+                            html += ' </select>';
+                            return html;
+                        }
+
+                        function ajoutSection(){
+                            var tab = document.getElementById("tableSections");
+                            var angle = tab.insertRow(-1);
+
+                            var cell = angle.insertCell(0);
+                            cell.setAttribute("colspan", "2");
+                            cell.innerHTML = selectAngle("false");
+
+                            var row = tab.insertRow(-1);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+
+                            cell1.innerHTML = ((tab.rows.length) / 2).toString();
+                            cell2.innerHTML = '<input class="form-control input-md" type="text" />';
+                            cell3.innerHTML = '<a onclick="SupprLigne(this)"><img src="/images/trash.png" alt="Suppr." class="icone"/></a>';
+                        }
+                        
+                        function SupprLigne(obj){
+                            var td = obj.parentElement;
+                            var tr = td.parentElement;
+                            var index = tr.rowIndex;
+                            var tab = document.getElementById("tableSections");
+                            tab.deleteRow(index);
+                            tab.deleteRow(index - 1);
+                            
+                        }
+                    </script>
+                     <table class="table table-striped thead-dark table-hover" id="tableSections">
+                        <thead>
+                            <tr>
+                                <th>Section</th>
+                                <th>Longueur</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: rows">
+                        <% if(module && module.config){ %>
+                            <% if((module.config).indexOf(";") > -1){ var sections = (module.config).split(";"); var cpt = 0; %>
+                                <% _.each(sections, function(sect) { var longueur = sect.split("&")[0]; var angle = sect.split("&")[1]; cpt++; %>
+                                    <tr>
+                                        <td><%= cpt %></td>
+                                        <td><input class="form-control input-md" type="text" value="<%= longueur %>" /></td>
+                                        <% if(cpt != 1){%><td><a onclick="SupprLigne(this)"><img src="/images/trash.png" alt="Suppr." class="icone"/></a></td><%}%>
+                                    </tr>
+                                    <% if(angle != "false"){ %>
+                                    <tr>
+                                        <td colspan="2"><% selectAngle(angle) %></td>
+                                    </tr>
+                                    <% } %>
+                                <% }) %>
+                            <% }else{ %>
+                                <tr>
+                                   <td>1</td>
+                                   <td><%= module.config %></td>
+                                </tr>
+                            <% } %>
+                        <% }else{ %>
+                              <tr>
+                                  <td>1</td>
+                                  <td><input class="form-control input-md" type="text"  /></td>
+                              </tr>
+                        <% } %>
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="config" />
+                    <br/>
+               
+				
+				    <input class="btn btn-success" type="submit" value="Ajouter le module" />
+                </fieldset>
+			</form>
+
+		</div>
+        
+        
+	</div>
+</div>
+
+
+
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+
+
+<script>
+
+    // Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('myImg');
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+} 
+
+</script>
+
+<style>
+
+     /* Style the Image Used to Trigger the Modal */
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+} 
+
+</style>
+
+
+
+
+
+
+

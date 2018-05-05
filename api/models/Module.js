@@ -40,6 +40,9 @@ module.exports = {
     tarif: {
       type: "string"
     },
+    config: {
+      type: "string"
+    },
     modeles: {
       collection: "modele",
       via: "cd_module",

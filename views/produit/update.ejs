@@ -8,6 +8,10 @@
 	<br/>
 	<div class="row">
         <div class="col-md-6">
+            <img id="myImg" src="/images/<%= produit.plan %>" alt="Plan" style="width:100%">
+        </div>
+        
+        <div class="col-md-6">
 			<form class="form-inline" action="/produit/create/<%= produit.id %>" method="POST">
 				<fieldset>
 					<legend>Caractéristique du produit</legend>
@@ -83,11 +87,11 @@
 				    <input class="btn btn-success" type="submit" value="Envoyer" />
                 </fieldset>
 			</form>
+            <br/>
+            <a class="btn btn-primary" href="/produit/module/?produit=<%= produit.id %>">Ajouter un module</a>
 		</div>
         
-        <div class="col-md-6">
-            <img id="myImg" src="/images/<%= produit.plan %>" alt="Plan" style="width:100%">
-        </div>
+        
 	</div>
 </div>
 
