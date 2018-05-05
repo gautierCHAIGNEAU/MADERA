@@ -16,10 +16,19 @@ module.exports = {
               if(!produits){
                   return next();
               }
-              res.view({
-                  produits: produits,
-                  projet: req.param('id')
+              Projet.findOne(req.param('id'), function(err, projet){
+                  if(err){
+                      return next(err);
+                  }
+                  if(!projet){
+                      return next();
+                  }
+                  res.view({
+                      produits: produits,
+                      projet: projet
+                  });
               });
+              
           });
 
 	},
@@ -62,20 +71,28 @@ module.exports = {
 	},
     
     create: function(req,res,next){
+            Modele.findOne(req.param('cd_modele')).exec(function(err, modele){
+                if(err){
+                    return next(err);
+                }
+                if(!modele){
+                    return next();
+                }
+                Produit.create({
+                    note: req.param('note'),
+                    cd_gamme: req.param('cd_gamme'),
+                    cd_projet: req.param('cd_projet'),
+                    nbr_etage: modele.nbre_etage,
+                    plan: modele.nom + "Plan.jpg"
+                }, 
+                function(err, projet){
+                    if(err){
+                        return next(err);
+                    }
+                    res.redirect("/produit/all/" + req.param('cd_projet'));
+                });
+            });
 
-			Produit.create({
-                note: req.param('note'),
-                cd_gamme: req.param('cd_gamme'),
-                cd_projet: req.param('cd_projet')
-            }, 
-            function(err, projet){
-				if(err){
-					return next(err);
-				}
-				res.redirect("/produit/all/" + req.param('cd_projet'));
-			});
-		
-		
 	},
     
     update: function(req,res,next){

@@ -22,6 +22,9 @@ module.exports = {
     nbr_etage: {
       type: "string"
     },
+    plan: {
+      type: "string"
+    },
     cd_gamme: {
       model: "gamme"
     },

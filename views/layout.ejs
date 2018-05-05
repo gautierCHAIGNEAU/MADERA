@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title>Application Madera</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,14 +29,24 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
 
+       <!--SCRIPTS-->
+       <script src="/js/dependencies/sails.io.js"></script>
+       <script src="/js/jquery-2.2.4.min.js"></script>
+       <script src="/js/scripts/produit/script.js"></script>
+       <script src="/js/scripts/projet/script.js"></script>
+       <script src="/js/vendor/bootstrap.js"></script>
+       <!--SCRIPTS END-->
+      
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <!--STYLES END-->
+
+     
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Application Madera</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -44,24 +55,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/projet/all">Espace Projet</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/client/all">Clients</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="/projet/all">Espace Projet</a></li>
+                <li class="nav-item"><a class="nav-link" href="/client/all">Clients</a></li>
+                
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <h5><span class="badge badge-success">Mode Connecté</span></h5>
             </form>
         </div>
-    </nav>
+    </nav> 
+      
+    
+
+      
+      
+
     <%- body %>
 
 
@@ -115,12 +124,6 @@
 
     -->
 
-    <!--SCRIPTS-->
-    <script src="/js/dependencies/sails.io.js"></script>
-    <script src="/js/vendor/jquery-3.3.1.min.js"></script>
-    <script src="/js/scripts/produit/script.js"></script>
-    <script src="/js/scripts/projet/script.js"></script>
-    <script src="/js/vendor/bootstrap.js"></script>
-    <!--SCRIPTS END-->
+    
   </body>
 </html>
