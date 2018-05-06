@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing produits
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var Produit_moduleController = require('./Produit_moduleController');
 
 module.exports = {
     
@@ -78,19 +79,31 @@ module.exports = {
                 if(!modele){
                     return next();
                 }
-                Produit.create({
-                    note: req.param('note'),
-                    cd_gamme: req.param('cd_gamme'),
-                    cd_projet: req.param('cd_projet'),
-                    nbr_etage: modele.nbre_etage,
-                    plan: modele.nom + "Plan.jpg"
-                }, 
-                function(err, projet){
+                Modele_module.find({cd_modele: req.param('cd_modele')}).populate('cd_module').exec(function(err, modules){
                     if(err){
                         return next(err);
                     }
-                    res.redirect("/produit/all/" + req.param('cd_projet'));
+                    if(!modules){
+                        return next();
+                    }
+                    Produit.create({
+                        note: req.param('note'),
+                        cd_gamme: req.param('cd_gamme'),
+                        cd_projet: req.param('cd_projet'),
+                        nbr_etage: modele.nbre_etage,
+                        plan: modele.nom + "Plan.jpg"
+                    }, 
+                    function(err, produit){
+                        if(err){
+                            return next(err);
+                        }
+                        var data = [produit.id, modules];
+                        Produit_moduleController.create(req,res,next,data);
+                        res.redirect("/produit/all/" + req.param('cd_projet'));
+                    });
                 });
+                
+                
             });
 
 	},
@@ -158,15 +171,8 @@ module.exports = {
     },
     
     destroy: function(req, res, next){
-		Produit.destroy(req.param('id'), function(err, produit){
-			if(err){
-				return next(err);
-			}
-			if(!produit){
-				return next();
-			}
-			res.redirect("/produit/all/" + req.query.projet);
-		});
+        Produit_moduleController.destroy(req,res,next,req.param('id'), req.query.projet);
+		
 	}
 
 };

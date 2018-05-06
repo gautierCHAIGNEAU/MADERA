@@ -9,8 +9,12 @@ module.exports = {
 
   autoCreatedAt: false,
   autoUpdatedAt: false,
-  id: false,
   attributes: {
+    id: {
+      type: 'number',
+      primaryKey: true,
+      autoIncrement: true
+    },
     quantite: {
       type: "string"
     },
@@ -18,6 +22,7 @@ module.exports = {
       model: "module"
     },
     cd_produit: {
+         
       model: "produit"
     }
 
