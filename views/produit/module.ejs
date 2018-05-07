@@ -60,6 +60,8 @@
                             html += ' </select>';
                             return html;
                         }
+                        
+                  
 
                         function ajoutSection(){
                             var tab = document.getElementById("tableSections");
@@ -106,9 +108,15 @@
                                         <td><input class="form-control input-md" type="text" value="<%= longueur %>" /></td>
                                         <% if(cpt != 1){%><td><a onclick="SupprLigne(this)"><img src="/images/trash.png" alt="Suppr." class="icone"/></a></td><%}%>
                                     </tr>
-                                    <% if(angle != "false"){ %>
+                                    <% if(angle != "false" && angle != null){ %>
                                     <tr>
-                                        <td colspan="2"><% selectAngle(angle) %></td>
+                                        <td colspan="2">
+                                            <select name="#" class="form-control  col-md-8" id="selectAngle">
+                                                <option value="false" >Aucun angle</option>
+                                                <option value="entrant" <% if(angle == "entrant"){ %>selected<% } %> >Angle entrant</option>
+                                                <option value="sortant" <% if(angle == "sortant"){ %>selected<% } %> >Angle sortant</option>
+                                            </select>
+                                        </td>
                                     </tr>
                                     <% } %>
                                 <% }) %>

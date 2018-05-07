@@ -167,6 +167,7 @@ module.exports = {
 	},
     
     'module': function(req,res,next){
+       
          Produit.findOne(req.query.produit).populate("cd_gamme").exec(function(err, produit){
             if(err){
                 return next(err);
@@ -174,10 +175,20 @@ module.exports = {
             if(!produit){
                 return next();
             }
-             res.view({
-                 produit: produit,
-                 module: null
-             });
+            if(req.param('id')){
+                 Module.findOne(req.param('id'),function(err, module){
+                    res.view({
+                         produit: produit,
+                         module: module
+                     });
+                 });
+            }else{
+                res.view({
+                     produit: produit,
+                     module: null
+                 });
+            }
+             
          });
         
     },
