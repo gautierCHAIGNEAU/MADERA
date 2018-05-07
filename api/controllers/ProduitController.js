@@ -133,13 +133,25 @@ module.exports = {
                             if(err){
                                 return next(err);
                             }
-                            res.view({
-                                produit: produit,
-                                finitions_ext: finitions_ext,
-                                finitions_int: finitions_int,
-                                isolations: isolations,
-                                couvertures: couvertures
+                            Produit_module.find({cd_produit:req.param('id')}).populate("cd_module").exec(function(err, modules){
+                                if(err){
+                                    return next(err);
+                                }
+                                modules.sort(function(a,b) {
+                                    if (a.cd_module.designation > b.cd_module.designation) return 1;
+                                    if (a.cd_module.designation < b.cd_module.designation) return -1;
+                                    return 0
+                                })
+                                res.view({
+                                    produit: produit,
+                                    finitions_ext: finitions_ext,
+                                    finitions_int: finitions_int,
+                                    isolations: isolations,
+                                    couvertures: couvertures,
+                                    modules: modules
+                                });
                             });
+                            
                         });
                         
                     });

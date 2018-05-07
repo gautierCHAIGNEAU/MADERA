@@ -74,7 +74,7 @@
                             var cell2 = row.insertCell(1);
                             var cell3 = row.insertCell(2);
 
-                            cell1.innerHTML = ((tab.rows.length) / 2).toString();
+                            cell1.innerHTML = "Section";
                             cell2.innerHTML = '<input class="form-control input-md" type="text" />';
                             cell3.innerHTML = '<a onclick="SupprLigne(this)"><img src="/images/trash.png" alt="Suppr." class="icone"/></a>';
                         }
@@ -102,7 +102,7 @@
                             <% if((module.config).indexOf(";") > -1){ var sections = (module.config).split(";"); var cpt = 0; %>
                                 <% _.each(sections, function(sect) { var longueur = sect.split("&")[0]; var angle = sect.split("&")[1]; cpt++; %>
                                     <tr>
-                                        <td><%= cpt %></td>
+                                        <td>Section</td>
                                         <td><input class="form-control input-md" type="text" value="<%= longueur %>" /></td>
                                         <% if(cpt != 1){%><td><a onclick="SupprLigne(this)"><img src="/images/trash.png" alt="Suppr." class="icone"/></a></td><%}%>
                                     </tr>
@@ -114,13 +114,13 @@
                                 <% }) %>
                             <% }else{ %>
                                 <tr>
-                                   <td>1</td>
+                                   <td>Section</td>
                                    <td><%= module.config %></td>
                                 </tr>
                             <% } %>
                         <% }else{ %>
                               <tr>
-                                  <td>1</td>
+                                  <td>Section</td>
                                   <td><input class="form-control input-md" type="text"  /></td>
                               </tr>
                         <% } %>

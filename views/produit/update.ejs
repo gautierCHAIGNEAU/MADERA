@@ -7,9 +7,7 @@
     </div>
 	<br/>
 	<div class="row">
-        <div class="col-md-6">
-            <img id="myImg" src="/images/<%= produit.plan %>" alt="Plan" style="width:100%">
-        </div>
+        
         
         <div class="col-md-6">
 			<form class="form-inline" action="/produit/create/<%= produit.id %>" method="POST">
@@ -84,14 +82,61 @@
                     <br/>
                
 				
-				    <input class="btn btn-success" type="submit" value="Envoyer" />
+				    <input class="btn btn-success" type="submit" value="Mettre à jour" />
                 </fieldset>
 			</form>
             <br/>
+            <br/>
+            <legend>Liste des modules</legend>
+            <i>Début: haut-gauche. Continuité dans le sens des aiguilles d'une montre.</i>
+            <br/>
+            <br/>
             <a class="btn btn-primary" href="/produit/module/?produit=<%= produit.id %>">Ajouter un module</a>
+            
+            <br/>
+            
+             
 		</div>
-        
-        
+        <div class="col-md-6">
+            <img id="myImg" src="/images/<%= produit.plan %>" alt="Plan" style="width:100%">
+        </div>
+        <table class="table table-striped thead-dark table-hover" id="tableSections">
+                 <thead>
+                     <tr>
+                         <th>Module</th>
+                         <th>Conception</th>
+                         <th>Action</th>
+                     </tr>
+                 </thead>
+                 <tbody data-bind="foreach: rows">
+                 <% if(modules){ %>
+                     <% _.each(modules, function(prod_mod) { var module = prod_mod.cd_module; var caract = module.config; %>
+                        <% if(caract.indexOf(";") > -1){  var sections = caract.split(";"); var cpt = 0 %>
+                            <tr>
+                                <td><%= module.designation %></td>
+                                <td>
+                                <% _.each(sections, function(section) { cpt++;%>
+                                    <% if(section.indexOf("&") > -1){ var longueur = section.split("&")[0]; var angle = section.split("&")[1]; %>
+                                        <% if(cpt != 1){%> - <%}%>Section: <%= longueur %> cm - <% if(angle == "entrant"){%> Angle entrant<% }else{%> Angle sortant<%}%>
+                                    <%}else{%>
+                                        <% if(cpt != 1){%> - <%}%>Section: <%= section %> cm
+                                    <%}%>
+                                <% }) %>
+                                </td>
+                                <td><a href="/produit/module/<%= module.id %>?produit=<%= prod_mod.cd_produit %>"><img src="/images/pencil.png" alt="Modif." class="icone"/></a></td>
+                            </tr>
+                         
+                     <% }else{ %>
+                         <tr>
+                            <td><%= module.designation %></td>
+                            <td>Section: <%= module.config %> cm</td>
+                             <td><a href="/produit/module/<%= module.id %>?produit=<%= prod_mod.cd_produit %>"><img src="/images/pencil.png" alt="Modif." class="icone"/></a></td>
+                         </tr>
+                     <% } %>
+                    <% }) %>
+                 <% } %>
+                 </tbody>
+             </table>
 	</div>
 </div>
 
