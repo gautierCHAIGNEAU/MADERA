@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+	create: function(req,res){
+        res.redirect("/produit/update/" + req.param("produit"));
+    }
 };
 
