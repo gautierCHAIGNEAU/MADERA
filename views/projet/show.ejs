@@ -1,0 +1,27 @@
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-6">
+            <h2>Projet: <i><%= projet.titre %></i></h2>
+            <p>Date: <i><%= projet.date_creation %></i></p>
+        </div>
+        <div class="col-sm-6">
+            <h4>Client</h4>
+            <p><%= projet.cd_client.nom %> <%= projet.cd_client.prenom %></p>
+            <p><%= projet.cd_client.adresse_numero %>, <%= projet.cd_client.adresse %> <% if(projet.cd_client.adresse_complementaire){ %><%= projet.cd_client.adresse_complementaire %> <% } %> <%= projet.cd_client.adresse_codepostale %> <%= projet.cd_client.adresse_ville %></p>
+            <p>Tél. fixe: <%= projet.cd_client.telephone %>, Tél. portable: <%= projet.cd_client.portable %></p>
+        </div>
+    </div>
+    <br/>
+
+       
+</div>
+
+
+
+
+
+
+
+
+

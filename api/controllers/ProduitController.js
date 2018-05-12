@@ -5,8 +5,35 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var Produit_moduleController = require('./Produit_moduleController');
+var fs = require('fs');
+var pdf = require('html-pdf');
+//var html = fs.readFileSync('./test/businesscard.html', 'utf8');
+var options = { format: 'Letter' };
 
 module.exports = {
+    
+    'show': function(req, res, next){
+
+          Produit.findOne(req.param('id')).populate('cd_projet').exec(function(err, produit){
+              if(err){
+                  return next(err);
+              }
+              if(!produit){
+                  return next();
+              }
+              Projet.findOne(produit.cd_projet.id).populate('cd_client').exec(function(err, projet){
+                   console.log(produit);
+                  console.log(projet);
+                    res.view({
+                        projet: projet,
+                        produit: produit
+                    });
+              
+              });
+             
+          });
+
+	},
     
 	'all': function(req, res, next){
 
@@ -196,7 +223,17 @@ module.exports = {
     destroy: function(req, res, next){
         Produit_moduleController.destroy(req,res,next,req.param('id'), req.query.projet);
 		
-	}
+	},
+    
+    'devis': function(req, res, next){
+
+        pdf.create("<html><body><h1 style='color:red'>COUCOU les ZAMIS</h1></body></html>").toStream((err, stream) => {
+            if (err) return res.end(err.stack)
+            res.setHeader('Content-type', 'application/pdf')
+            stream.pipe(res)
+        });
+        
+    }
 
 };
 

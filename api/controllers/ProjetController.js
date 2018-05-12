@@ -159,6 +159,29 @@ module.exports = {
 			}
 			res.redirect("/projet/all");
 		});
+	},
+    
+    'show': function(req, res, next){
+
+          Produit.findOne(req.param('id')).populate('cd_projet').exec(function(err, produit){
+              if(err){
+                  return next(err);
+              }
+              if(!produit){
+                  return next();
+              }
+              Projet.findOne(produit.cd_projet.id).populate('cd_client').exec(function(err, projet){
+                   console.log(produit);
+                  console.log(projet);
+                    res.view({
+                        projet: projet,
+                        produit: produit
+                    });
+              
+              });
+             
+          });
+
 	}
 };
 
